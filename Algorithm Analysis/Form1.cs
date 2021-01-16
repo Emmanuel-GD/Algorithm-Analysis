@@ -28,12 +28,6 @@ namespace AnalysisOfAlgorithms
             InitializeComponent();
             string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
             path += @"\AppData\numbers.json";
-            //string appPath = Path.GetDirectoryName(Application.ExecutablePath);
-
-            //System.IO.DirectoryInfo directoryInfo = System.IO.Directory.GetParent(appPath);
-            //System.IO.DirectoryInfo directoryInfo2 = System.IO.Directory.GetParent(directoryInfo.FullName);
-
-            //string path = directoryInfo2.FullName + @"\AppData";
 
             JAllObject = ParseJson(path);
         }
@@ -79,22 +73,16 @@ namespace AnalysisOfAlgorithms
             int[] right;
             int[] result = new int[unsorted.Length];
             int[] input = unsorted;
-            //As this is a recursive algorithm, we need to have a base case to 
-            //avoid an infinite recursion and therfore a stackoverflow
+
             if (input.Length <= 1)
             {
                 OperationCounter += 1;
                 return input;
             }
             OperationCounter += 1;
-            // The exact midpoint of our input  
             int midPoint = input.Length / 2;
-            //Will represent our 'left' input
             left = new int[midPoint];
 
-            //if input has an even number of elements, the left and right input will have the same number of 
-            //elements
-            //if input has an odd number of elements, the right input will have one more element than left
             if (input.Length % 2 == 0)
             {
                 OperationCounter += 1;
@@ -105,16 +93,16 @@ namespace AnalysisOfAlgorithms
                 OperationCounter += 1;
                 right = new int[midPoint + 1];
             }
-            //populate left input
+
             for (int i = 0; i < midPoint; i++)
             {
                 OperationCounter += 1;
                 left[i] = input[i];
             }
             OperationCounter += 1;
-            //populate right input   
+
             int x = 0;
-            //We start our index from the midpoint, as we have already populated the left input from 0 to midpont
+
             for (int i = midPoint; i < input.Length; i++)
             {
                 OperationCounter += 1;
@@ -122,11 +110,8 @@ namespace AnalysisOfAlgorithms
                 x++;
             }
             OperationCounter += 1;
-            //Recursively sort the left input
             left = MergeSort(left);
-            //Recursively sort the right input
             right = MergeSort(right);
-            //Merge our two sorted inputs
             result = Merge(left, right);
             return result;
         }
@@ -141,17 +126,16 @@ namespace AnalysisOfAlgorithms
         {
             int resultLength = right.Length + left.Length;
             int[] result = new int[resultLength];
-            //
+
             int indexLeft = 0, indexRight = 0, indexResult = 0;
-            //while either input still has an element
+
             while (indexLeft < left.Length || indexRight < right.Length)
             {
                 OperationCounter += 3;
-                //if both inputs have elements  
                 if (indexLeft < left.Length && indexRight < right.Length)
                 {
                     OperationCounter += 3;
-                    //If item on left input is less than item on right input, add that item to the result input 
+
                     if (left[indexLeft] <= right[indexRight])
                     {
                         OperationCounter += 1;
@@ -159,16 +143,14 @@ namespace AnalysisOfAlgorithms
                         indexLeft++;
                         indexResult++;
                     }
-                    // else the item in the right input wll be added to the results input
                     else
                     {
-                        //OperationCounter += 1;
+                        OperationCounter += 1;
                         result[indexResult] = right[indexRight];
                         indexRight++;
                         indexResult++;
                     }
                 }
-                //if only the left input still has elements, add all its items to the results input
                 else if (indexLeft < left.Length)
                 {
                     OperationCounter += 1;
@@ -176,7 +158,6 @@ namespace AnalysisOfAlgorithms
                     indexLeft++;
                     indexResult++;
                 }
-                //if only the right input still has elements, add all its items to the results input
                 else if (indexRight < right.Length)
                 {
                     OperationCounter += 1;
@@ -214,6 +195,7 @@ namespace AnalysisOfAlgorithms
             }
             catch (Exception ex)
             {
+                //this is no showing for unknown reason...check it again
                 MessageBox.Show($"{unsorted.Length} " + ex.Message);
             }
             return unsorted;
@@ -274,14 +256,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[1]);
                         label4.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label3.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[2]);
                         label6.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label5.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -307,14 +289,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[1]);
                         label10.Text = $"Execution Time : { Watch.ElapsedMilliseconds } Milli Sec(s)";
                         label9.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[2]);
                         label8.Text = $"Execution Time : { Watch.ElapsedMilliseconds } Milli Sec(s)";
                         label7.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -340,14 +322,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[1]);
                         label16.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label15.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[2]);
                         label14.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label13.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -373,14 +355,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[1]);
                         label22.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label21.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[2]);
                         label20.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label19.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -406,14 +388,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[1]);
                         label28.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label27.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[2]);
                         label26.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label25.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -440,14 +422,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[1]);
                         label34.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label33.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         InsertionSort(JaggedArray[2]);
                         label32.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label31.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -488,7 +470,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -498,7 +480,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -530,7 +512,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -540,7 +522,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -573,7 +555,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -583,7 +565,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -615,7 +597,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -626,7 +608,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -660,7 +642,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -670,7 +652,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -706,7 +688,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -717,7 +699,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -761,7 +743,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -771,7 +753,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -803,7 +785,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -813,7 +795,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -846,7 +828,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -856,7 +838,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -888,7 +870,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -899,7 +881,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -933,7 +915,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -943,7 +925,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -979,7 +961,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -990,7 +972,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1006,6 +988,7 @@ namespace AnalysisOfAlgorithms
                 }
             }
         }
+
 
         /*
         private void Insertion_Sort_Click(object sender, EventArgs e)
@@ -1031,14 +1014,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[1]);
                         label4.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label3.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[2]);
                         label6.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label5.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -1064,14 +1047,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[1]);
                         label10.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label9.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[2]);
                         label8.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label7.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -1097,14 +1080,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[1]);
                         label16.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label15.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[2]);
                         label14.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label13.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -1130,14 +1113,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[1]);
                         label22.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label21.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[2]);
                         label20.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label19.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -1163,14 +1146,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[1]);
                         label28.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label27.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[2]);
                         label26.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label25.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -1197,14 +1180,14 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[1]);
                         label34.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label33.Text = $"Operations(Comparison) : {OperationCounter}";
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         InsertionSort(JaggedArray[2]);
                         label32.Text = $"Execution Time : {Watch.ElapsedMilliseconds} Milli Sec(s)";
                         label31.Text = $"Operations(Comparison) : {OperationCounter}";
@@ -1245,7 +1228,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -1255,7 +1238,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -1287,7 +1270,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -1297,7 +1280,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -1330,7 +1313,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -1340,7 +1323,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -1372,7 +1355,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -1383,7 +1366,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -1417,7 +1400,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[1]);
@@ -1427,7 +1410,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -1463,7 +1446,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -1474,7 +1457,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         MergeSort(JaggedArray[2]);
@@ -1518,7 +1501,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -1528,7 +1511,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1560,7 +1543,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -1570,7 +1553,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1603,7 +1586,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -1613,7 +1596,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1645,7 +1628,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -1656,7 +1639,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1690,7 +1673,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[1], 0, JaggedArray[1].Length - 1);
@@ -1700,7 +1683,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1736,7 +1719,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
 
                         Watch = new Stopwatch();
                         Watch.Start();
@@ -1747,7 +1730,7 @@ namespace AnalysisOfAlgorithms
 
                         OperationCounter = 0;
                         Application.DoEvents();
-                        //groupBox1.Text = JaggedArray[0].Length + " Elements";
+                        
                         Watch = new Stopwatch();
                         Watch.Start();
                         Sort(JaggedArray[2], 0, JaggedArray[2].Length - 1);
@@ -1764,5 +1747,6 @@ namespace AnalysisOfAlgorithms
             }
         }
     */
+
     }
 }
