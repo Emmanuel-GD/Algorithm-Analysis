@@ -19,7 +19,7 @@ namespace AnalysisOfAlgorithms
         public static JObject JAllObject { get; set; }
         public long OperationCounter { get; set; }
 
-        static int[][] JaggedArray = new int[3][];
+        static int[][] JaggedArray = new int[6][];
 
         public Stopwatch Watch { get; set; }
 
