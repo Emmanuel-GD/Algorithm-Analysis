@@ -8,7 +8,7 @@ If the owner (My Instructor) requested to do so.
 ###### Assignment 1
 
 ###### SWEG 5012: Advanced Algorithms and Problem Solving
-#####Analyzing the Complexity of Algorithms
+###### Analyzing the Complexity of Algorithms
 The assignment aims to develop your insight into the performance of algorithms. You shall look at both the
 actual running time of algorithms (in milliseconds of CPU usage) and the complexity of algorithms (in terms
 of the number of operations performed). The main emphasis is not so much on coding but is on understanding
